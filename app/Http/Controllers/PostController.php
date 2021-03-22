@@ -8,6 +8,7 @@ class PostController extends Controller
 {
     public function index()
     {
+
         $allPosts = [
             ['id' => 1, 'title' => 'laravel', 'posted_by' => 'Ahmed', 'created_at' => '2021-03-20'],
             ['id' => 2, 'title' => 'PHP', 'posted_by' => 'Mohamed', 'created_at' => '2021-04-15'],
@@ -27,11 +28,22 @@ class PostController extends Controller
             'post' => $post,
         ]);
     }
+        
+    public function edit($postId){
+
+        return view('posts.edit',[
+            'post' => $postId
+        ]);
+    }
+
+
 
     public function create()
     {
         return view('posts.create');
     }
+
+
 
     public function store()
     {

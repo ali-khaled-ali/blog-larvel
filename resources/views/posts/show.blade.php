@@ -14,4 +14,21 @@
       <p class="card-text">{{ $post['description'] }}</p>
     </div>
 </div>
+
+
+<div class="card" style="margin-top: 50px;">
+    <div class="card-header">
+      Post Creator Info
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Name:-</h5>
+      <p class="card-text"></p>
+      <h5 class="card-title">Emai:-</h5>
+      <p class="card-text"></p>
+      <h5 class="card-title">Created at:-</h5>
+      <p class="card-text"></p>
+    </div>
+</div>
+
+
 @endsection
