@@ -17,14 +17,17 @@
     </thead>
     <tbody>
     @foreach($posts as $post)
+    <!--   {{-- @dd($post->myUserRelation) --}};           in Post model i made posts belongs to users with the user_id
+    this allow me to access the users table from the posts tables with the user_id
+      -->
       <tr>
-        <th scope="row">{{ $post['id'] }}</th>
-        <td>{{ $post['title'] }}</td>
-        <td>{{ $post['posted_by'] }}</td>
-        <td>{{ $post['created_at'] }}</td>
+        <th scope="row">{{ $post->id }}</th>
+        <td>{{ $post->title }}</td>
+        <td>{{ $post->myUserRelation->name? $post->myUserRelation->name: "" }}</td>
+        <td>{{ $post->created_at }}</td>
         <td>
-          <a href="{{ route('posts.show',['post' => $post['id']]) }}" class="btn btn-info" style="margin-bottom: 20px;">View</a>
-          <a href="{{ route('posts.edit',['post'=> $post['id']]) }}" class="btn btn-secondary" style="margin-bottom: 20px;">Edit</a>
+          <a href="{{ route('posts.show',['post' => $post->id]) }}" class="btn btn-info" style="margin-bottom: 20px;">View</a>
+          <a href="{{ route('posts.edit',['post'=> $post->id]) }}" class="btn btn-secondary" style="margin-bottom: 20px;">Edit</a>
           <button type="button" class="btn btn-danger" style="margin-bottom: 20px;">Delete</button>
         </td>
       </tr>

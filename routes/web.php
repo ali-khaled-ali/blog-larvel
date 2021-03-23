@@ -23,6 +23,8 @@ Route::get('/posts/create',[PostController::class, 'create'])->name('posts.creat
 Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::post('/posts',[PostController::class, 'store'])->name('posts.store');
+Route::post('/posts',[PostController::class, 'store'])->name('posts.store');
+Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 // Route::get('/test', 'TestController@testAction'); old syntax
 
 Route::get('/hello-from-framework', function () {
