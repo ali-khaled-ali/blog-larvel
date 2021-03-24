@@ -12,13 +12,15 @@ class PostController extends Controller
     public function index()
     {
 
-        $allPosts= Post::all();
+        //$allPosts= Post::all();
         
        // DB::table('posts')->simplepaginate(2);
 
          //Post::all();
 
-       // dd($allPosts);
+         Post::paginate(2);
+         Post::paginate(2);
+       // dd(Post::paginate(2));
         // $allPosts = [                         stattic data 
         //     ['id' => 1, 'title' => 'laravel', 'posted_by' => 'Ahmed', 'created_at' => '2021-03-20'],
         //     ['id' => 2, 'title' => 'PHP', 'posted_by' => 'Mohamed', 'created_at' => '2021-04-15'],
@@ -26,7 +28,8 @@ class PostController extends Controller
         // ];
 
         return view('posts.index', [
-            'posts' => $allPosts
+            'posts' => Post::paginate(2)
+            // $allPosts
         ]);
     }
 
