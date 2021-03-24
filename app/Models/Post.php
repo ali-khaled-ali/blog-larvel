@@ -18,6 +18,8 @@ class Post extends Model
 
 
 
+
+
     public function myUserRelation(){
         return $this->belongsTo(User::class,'user_id');
     }

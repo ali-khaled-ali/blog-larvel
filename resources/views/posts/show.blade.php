@@ -23,9 +23,9 @@
     </div>
     <div class="card-body">
       <h5 class="card-title">Name:-</h5>
-      <p class="card-text">{{$post->myUserRelation->name}}</p>
+      <p class="card-text">{{$post->myUserRelation ? $post->myUserRelation->name : " "}}</p>
       <h5 class="card-title">Emai:-</h5>
-      <p class="card-text">{{$post->myUserRelation->email}}</p>
+      <p class="card-text">{{$post->myUserRelation ?$post->myUserRelation->email : " "}}</p>
       <h5 class="card-title">Created at:-</h5>
       <p class="card-text">{{$post->created_at}}</p>
     </div>
