@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index()
     {
 
-        $allPosts = Post::all();
-        //dd($allPosts);
+        $allPosts= Post::all();
+        
+       // DB::table('posts')->simplepaginate(2);
+
+         //Post::all();
+
+       // dd($allPosts);
         // $allPosts = [                         stattic data 
         //     ['id' => 1, 'title' => 'laravel', 'posted_by' => 'Ahmed', 'created_at' => '2021-03-20'],
         //     ['id' => 2, 'title' => 'PHP', 'posted_by' => 'Mohamed', 'created_at' => '2021-04-15'],
@@ -39,8 +45,12 @@ class PostController extends Controller
         
     public function edit($postId){
 
+        $user = User::all();
+
         return view('posts.edit',[
-            'post' => $postId
+            'post' => $postId,
+            'users'=>$user
+
         ]);
     }
 
@@ -73,10 +83,49 @@ class PostController extends Controller
     }
 
 
-    public function update()
+    public function update($postId)
     {
         //logic to update request data into db
-       // dd("hi update");
+        //Post $post -> gives us a post object
+       //dd($postId);
+       $post = Post::find($postId);
+       
+       //dd(request());
+       
+       $post->title = request()->title;
+       
+       $post->description = request()->description;
+
+
+       $post->user_id = request()->user_id;
+       //dd($post);
+
+       $post->save();
+
+
         return redirect()->route('posts.index');
     }
+
+
+    public function destroy($postId){
+
+
+        Post::destroy($postId);
+        //echo("hiiiiiiiiii");
+        // echo '<script type="text/JavaScript"> 
+        //           confirm("lolodeleteos");
+
+        //       </script>';
+        //dd($postId);
+
+       
+
+
+       return redirect()->route('posts.index');
+
+    }
+
+
+
+
 }
