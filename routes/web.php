@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 
 
-//Route::group(['middleware'=>['auth']],function(){
+Route::group(['middleware'=>['auth']],function(){
 
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create');
@@ -32,7 +32,7 @@ Route::get('/', function () {
     Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 
 
-//});
+});
 
 // Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware(['auth']);
 // Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create');
