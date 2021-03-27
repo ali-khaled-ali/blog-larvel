@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +35,71 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 
 
+
+    
+
+    
+
 });
+
+
+Route::get('/auth/redirect', function () {
+     return Socialite::driver('github')->redirect();
+     
+     // dd('redirect');
+
+ });
+ 
+ Route::get('/auth/callback', function () {
+ 
+    
+     $user = Socialite::driver('github')->user();
+     //dd($user);
+
+
+     
+     $uId= $user->getId();
+     $uName=$user->getNickname();
+     $uEmail= $user->getEmail();
+     $fUser = User::where('email',$uEmail)->first();
+
+     if($fUser){
+        //dd("notnull");
+
+        //Auth::loginUsingId($uId);
+        Auth::login($fUser);
+
+     }
+        
+        else{
+           // dd('null');
+
+           $fUser= User::create([
+                //'id'=>$uId,
+                'name' => $uName,
+                'email' => $uEmail
+            ]);
+           // Auth::loginUsingId($uId);
+           Auth::login($fUser);
+
+
+        }
+           
+     
+   
+     
+     //dd($user->getId());
+     // $user->token
+
+
+
+     return redirect()->route('posts.index');
+
+    //Auth::login($user);
+
+ });
+
+
 
 // Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware(['auth']);
 // Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create');
@@ -55,3 +122,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
+
