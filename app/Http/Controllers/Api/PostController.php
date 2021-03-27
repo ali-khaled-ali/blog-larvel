@@ -15,9 +15,13 @@ class PostController extends Controller
 
        // dd('we are in index');
 
-    $post = Post::all();
+        //$post = Post::all();
 
+        $post  =  Post::with('user')->paginate(2); //eager loading search with pagination
+        
        return PostResource::collection($post);
+
+        
        
     }
 

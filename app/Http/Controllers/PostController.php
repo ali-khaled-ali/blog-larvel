@@ -19,8 +19,6 @@ class PostController extends Controller
 
          //Post::all();
 
-         Post::paginate(2);
-         Post::paginate(2);
        // dd(Post::paginate(2));
         // $allPosts = [                         stattic data 
         //     ['id' => 1, 'title' => 'laravel', 'posted_by' => 'Ahmed', 'created_at' => '2021-03-20'],
